@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asesmen Diagnostik: Energi Terbarukan (Kelas X)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef4f1;--card:#fff;--ink:#12302b;--mut:#4f6b65;--sun:#f2b705;--wind:#1d6fa5;--leaf:#2e8b57;--bad:#b3392f;--line:#cfdcd7}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f2420;--card:#173530;--ink:#e8f3ef;--mut:#9bb8b0;--line:#2c4d46;--wind:#6bb6ea;--leaf:#59c488}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:17px/1.55 Nunito,system-ui,sans-serif;min-height:100%;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.15;margin:0 0 .5em}
+h1{font-size:clamp(2rem,6vw,3.2rem);font-weight:800}
+main{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+.track{display:flex;gap:6px;margin:0 0 22px}
+.track div{flex:1;padding:8px 10px;border-radius:10px;border:2px solid var(--line);font-weight:700;font-size:.85rem;color:var(--mut);text-align:center}
+.track .on{border-color:var(--sun);color:var(--ink);background:color-mix(in srgb,var(--sun) 22%,transparent)}
+.track .ok{border-color:var(--leaf);color:var(--leaf)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+label{display:block;font-weight:700;margin:14px 0 4px}
+input[type=text],input[type=number]{width:100%;padding:12px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+button{font:inherit;font-weight:700;border:0;border-radius:12px;padding:13px 22px;background:var(--wind);color:#fff;cursor:pointer;margin-top:18px}
+button:disabled{opacity:.4;cursor:not-allowed}
+button.sun{background:var(--sun);color:#12302b}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.q{padding:14px 0;border-bottom:1px solid var(--line)}.q:last-of-type{border:0}
+.q p{margin:0 0 8px;font-weight:600}
+.opts{display:grid;gap:6px}
+.opts label{margin:0;font-weight:400;display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:2px solid var(--line);border-radius:10px;cursor:pointer}
+.opts label:has(input:checked){border-color:var(--wind);background:color-mix(in srgb,var(--wind) 14%,transparent)}
+.likert{display:flex;gap:6px}.likert label{flex:1;margin:0;text-align:center;padding:9px 0;border:2px solid var(--line);border-radius:10px;font-weight:700;cursor:pointer}
+.likert label:has(input:checked){background:var(--leaf);border-color:var(--leaf);color:#fff}
+.likert input,.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts input{position:static;opacity:1;margin-top:5px;pointer-events:auto}
+.scale{display:flex;justify-content:space-between;font-size:.8rem;color:var(--mut);margin-top:4px}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin:6px 0 14px}.bar i{display:block;height:100%;background:var(--sun);width:0;transition:width .2s}
+.game{text-align:center}
+.stats{display:flex;justify-content:space-between;font-weight:700}
+.tile{margin:18px auto;padding:34px 16px;border-radius:18px;background:var(--bg);border:3px dashed var(--line);font:800 1.5rem 'Bricolage Grotesque',sans-serif;min-height:120px;display:grid;place-items:center}
+.tile.good{border-color:var(--leaf);background:color-mix(in srgb,var(--leaf) 20%,transparent)}.tile.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 20%,transparent)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.two button{margin:0;padding:18px 8px}
+.warn{background:color-mix(in srgb,var(--sun) 25%,transparent);border-radius:10px;padding:10px 14px;font-size:.92rem;margin-top:14px}
+.hide{display:none}.who{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--sun);border-radius:10px;padding:8px 14px;margin:0 0 14px;font-weight:700}
+.res{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.res div{background:var(--bg);border-radius:12px;padding:14px;text-align:center}.res b{display:block;font:800 1.8rem 'Bricolage Grotesque',sans-serif}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--ink);border:2px solid var(--line);margin:0;padding:13px 16px}
+.opt.good{border-color:var(--leaf);background:color-mix(in srgb,var(--leaf) 22%,transparent)}.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 20%,transparent)}
+.chips{display:grid;gap:8px;text-align:left}
+.vill{height:14px;border-radius:8px;background:var(--line);overflow:hidden}.vill i{display:block;height:100%;background:linear-gradient(90deg,var(--sun),#ffe27a);transition:width .4s}
+.tile{font-size:1.7rem}
+</style>
+</head>
+<body>
+<main>
+<h1>Misi Energi Bersih</h1>
+<p style="color:var(--mut)">Asesmen diagnostik energi terbarukan untuk kelas X. Selesaikan 3 misi secara berurutan untuk membuka hasilmu.</p>
+<div class="track" id="track"><div>Misi 1</div><div>Misi 2</div><div>Misi 3</div><div>Hasil</div></div>
+<div id="who" class="who hide"></div>
+<section id="view"></section>
+</main>
+<script>
+/* ====== PENGATURAN GURU ====== */
+const SCRIPT_URL = ""; // tempel URL Web App Google Apps Script di sini (lihat Code.gs)
+/* ============================= */
+
+const M1 = [
+ ["Minat","Saya tertarik mempelajari sumber energi baru untuk masa depan."],
+ ["Minat","Saya senang membahas isu energi dan lingkungan di kelas."],
+ ["Motivasi","Saya mau berusaha keras memahami materi energi terbarukan, walau sulit."],
+ ["Motivasi","Saya belajar energi terbarukan karena ingin paham, bukan hanya demi nilai."],
+ ["Percaya diri","Saya yakin bisa menjelaskan cara kerja panel surya atau kincir angin."],
+ ["Percaya diri","Saya yakin mampu mengerjakan soal tentang energi dengan baik."],
+ ["Kepedulian","Saya mencoba menghemat listrik di rumah."],
+ ["Kepedulian","Saya merasa ikut bertanggung jawab mengurangi penggunaan bahan bakar fosil."]
+];
+const M2 = [
+ ["Energi terbarukan itu apa?","Energi dari sumber yang tersedia terus dan dapat pulih","Energi yang hanya dipakai di desa","Energi dari bahan bakar minyak","Energi yang tidak bisa disimpan",0,"Konsep dasar"],
+ ["Manakah sumber energi terbarukan?","Batu bara","Panas bumi","Gas alam","Minyak bumi",1,"Klasifikasi"],
+ ["Panel surya mengubah ... menjadi listrik.","Cahaya matahari","Panas dari api","Air hujan","Getaran tanah",0,"PLTS"],
+ ["PLTB bekerja dengan memanfaatkan ...","Aliran sungai","Uap dari kawah","Tiupan angin yang memutar turbin","Pembakaran sampah",2,"PLTB"],
+ ["PLTA memperoleh energi dari ...","Gas buang pabrik","Aliran air yang memutar turbin","Cahaya bulan","Pembusukan bahan organik",1,"PLTA"],
+ ["Biomassa berasal dari ...","Bahan organik seperti limbah pertanian","Batuan beku","Logam mulia","Gas mulia",0,"Biomassa"],
+ ["Mengapa batu bara disebut tidak terbarukan?","Karena harganya mahal","Karena terbentuk jutaan tahun sehingga cepat habis dipakai","Karena hanya ada di satu negara","Karena tidak bisa dibakar",1,"Fosil vs terbarukan"],
+ ["Kendala utama PLTS dan PLTB adalah ...","Menghasilkan limbah radioaktif","Sumbernya bergantung cuaca dan waktu","Butuh bahan bakar impor","Selalu menghasilkan asap",1,"Kendala"]
+];
+
+const S = JSON.parse(localStorage.getItem("asesmen")||"null") || {step:0,id:{},m1:[],m2:[],g:null,leaves:0,t0:Date.now()};
+const save=()=>{try{localStorage.setItem("asesmen",JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s), view=$("#view");
+const locked=()=>S.step>=1&&S.step<6;
+window.addEventListener("beforeunload",e=>{if(locked()){e.preventDefault();e.returnValue=""}});
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&locked()){S.leaves++;save()}});
+document.addEventListener("contextmenu",e=>{if(locked())e.preventDefault()});
+history.pushState(null,"",location.href);
+window.addEventListener("popstate",()=>{if(locked()){history.pushState(null,"",location.href);alert("Selesaikan Misi 3 dulu sebelum keluar.")}});
+
+function track(){const w=$("#who");if(S.id&&S.id.nama){w.textContent=`${S.id.nama} | Kelas ${S.id.kelas} | No. absen ${S.id.absen}`;w.classList.remove("hide")}else w.classList.add("hide");[...$("#track").children].forEach((d,i)=>{const x=S.step-2;d.className=S.step>=6||i<x?"ok":i==x?"on":""})}
+function go(n){S.step=n;save();track();[0,renderId,renderM1,renderM2,renderM3,renderDone][n]();window.scrollTo(0,0)}
+
+function renderId(){view.innerHTML=`<div class="card"><h2>Mulai misi</h2>
+<label for="n">Nama lengkap</label><input id="n" type="text" autocomplete="off">
+<label for="k">Kelas</label><input id="k" type="text" placeholder="contoh: X-3">
+<label for="a">Nomor absen</label><input id="a" type="number" min="1">
+<div class="warn">Setelah mulai, kamu harus menyelesaikan ketiga misi. Jangan tutup halaman atau pindah tab. Jawabanmu tersimpan otomatis bila terputus.</div>
+<button id="go" class="sun">Mulai Misi 1</button></div>`;
+$("#go").onclick=()=>{const n=$("#n").value.trim(),k=$("#k").value.trim(),a=$("#a").value;if(!n||!k||!a)return alert("Isi nama, kelas, dan nomor absen.");S.id={nama:n,kelas:k,absen:a};S.t0=Date.now();go(2)}}
+S.step===0&&(S.step=1);
+
+function renderM1(){view.innerHTML=`<div class="card"><h2>Misi 1: Kenali dirimu</h2><p style="color:var(--mut)">Tidak ada jawaban benar atau salah. Pilih yang paling sesuai (1 = sangat tidak setuju, 5 = sangat setuju).</p>
+<div class="bar"><i id="p"></i></div>`+M1.map((q,i)=>`<div class="q"><p>${i+1}. ${q[1]}</p><div class="likert">${[1,2,3,4,5].map(v=>`<label><input type="radio" name="m${i}" value="${v}"${S.m1[i]==v?" checked":""}>${v}</label>`).join("")}</div><div class="scale"><span>Sangat tidak setuju</span><span>Sangat setuju</span></div></div>`).join("")+`<button id="nx" class="sun" disabled>Selesai, lanjut Misi 2</button></div>`;
+wire("m",M1.length,"nx",()=>go(3),S.m1)}
+
+function renderM2(){view.innerHTML=`<div class="card"><h2>Misi 2: Uji pengetahuan</h2><p style="color:var(--mut)">Pilih satu jawaban terbaik. Nilai tidak ditampilkan sampai semua misi selesai.</p>
+<div class="bar"><i id="p"></i></div>`+M2.map((q,i)=>`<div class="q"><p>${i+1}. ${q[0]}</p><div class="opts">${[1,2,3,4].map((o,j)=>`<label><input type="radio" name="m${i}" value="${j}"${S.m2[i]==j?" checked":""}>${q[o]}</label>`).join("")}</div></div>`).join("")+`<button id="nx" class="sun" disabled>Selesai, lanjut Misi 3</button></div>`;
+wire("m",M2.length,"nx",()=>go(4),S.m2)}
+
+function wire(p,n,btn,next,arr){const upd=()=>{const c=arr.filter(v=>v!==undefined&&v!==null).length;$("#p").style.width=c/n*100+"%";$("#"+btn).disabled=c<n};
+view.querySelectorAll("input[type=radio]").forEach(r=>r.onchange=()=>{arr[+r.name.slice(1)]=+r.value;save();upd()});upd();$("#"+btn).onclick=next}
+
+const GS=[["☀️ Matahari",1],["🪨 Batu bara",0],["💨 Angin",1],["🛢️ Minyak bumi",0],["💧 Air terjun",1],["🔥 Gas alam",0],["🌋 Panas bumi",1],["⛽ Solar (diesel)",0],["🌾 Biomassa",1],["🌊 Gelombang laut",1]];
+const GM=[["☀️ Sinar matahari → pembangkit apa?",["PLTS","PLTB","PLTA","PLTP"],0],["💨 Tiupan angin → pembangkit apa?",["PLTS","PLTB","PLTA","PLTU"],1],["💧 Aliran air deras → pembangkit apa?",["PLTA","PLTB","PLTD","PLTS"],0],["🌋 Uap panas bumi → pembangkit apa?",["PLTB","PLTS","PLTP","PLTA"],2],["🌾 Limbah organik → pembangkit apa?",["PLTD","Biomassa / biogas","PLTS","PLTB"],1]];
+const GK=[["🏝️ Desa pesisir berangin kencang sepanjang tahun, belum ada listrik. Pilihan paling cocok?",["PLTU batu bara","PLTB (angin)","PLTD diesel","Genset bensin"],1],["⛰️ Dusun pegunungan punya sungai deras sepanjang tahun. Pembangkit terbaik?",["PLTU","PLTD","PLTA mikrohidro","Genset minyak"],2],["🏭 Pabrik tahu menghasilkan banyak limbah organik. Cara memanfaatkannya?",["Dibuang ke sungai","Dibakar terbuka","Dikubur saja","Dijadikan biogas"],3],["🌙 Malam hari panel surya tidak menghasilkan listrik. Solusi tepat?",["Matikan semua alat","Simpan energi di baterai","Ganti batu bara","Tunggu pagi"],1],["🏫 Sekolah beratap luas di daerah terik, jauh dari jaringan listrik. Paling hemat?",["Panel surya (PLTS)","Genset solar","Bakar batu bara","Beli minyak"],0]];
+const GO=[["⚡ Urutkan cara kerja PLTA",["Air ditampung di bendungan","Air jatuh memutar turbin","Turbin memutar generator","Listrik dialirkan ke rumah"]],["☀️ Urutkan cara kerja PLTS",["Sinar matahari mengenai panel","Sel surya menghasilkan arus listrik DC","Inverter mengubah ke arus AC","Listrik dipakai di rumah"]],["💨 Urutkan cara kerja PLTB",["Angin meniup bilah kincir","Rotor berputar","Generator mengubah putaran jadi listrik","Listrik masuk jaringan"]]];
+const sh=a=>[...a].sort(()=>Math.random()-.5);
+let gs;
+function renderM3(){if(S.g&&S.g.done)return go(5);
+view.innerHTML=`<div class="card game"><h2>Misi 3: Nyalakan Desa Gelap</h2><p>Desa ini kehabisan listrik. Selesaikan <b>4 ronde</b> tantangan energi untuk menyalakannya kembali: sortir kilat, cocokkan pembangkit, pilih solusi desa, lalu susun proses. Jawab cepat dan beruntun untuk bonus skor. Dimainkan sendiri.</p><button id="st" class="sun">Mulai bermain</button></div>`;
+$("#st").onclick=play}
+function play(){
+const rounds=[
+{t:"Ronde 1: Sortir Kilat",d:"Terbarukan atau tak terbarukan? Waktu 12 detik per kartu.",q:sh(GS).slice(0,8).map(x=>({k:"s",q:x[0],a:x[1]}))},
+{t:"Ronde 2: Cocokkan Pembangkit",d:"Pilih pembangkit yang cocok untuk setiap sumber energi.",q:sh(GM).map(x=>({k:"m",q:x[0],o:x[1],a:x[2]}))},
+{t:"Ronde 3: Solusi untuk Desa",d:"Bantu desa-desa ini dengan pilihan energi terbaik.",q:sh(GK).slice(0,4).map(x=>({k:"m",q:x[0],o:x[1],a:x[2]}))},
+{t:"Ronde 4: Susun Prosesnya",d:"Klik langkah sesuai urutan yang benar. Salah klik berarti gagal.",q:sh(GO).slice(0,2).map(x=>({k:"o",q:x[0],o:x[1]}))}];
+const total=rounds.reduce((a,r)=>a+r.q.length,0);
+gs={r:0,i:0,sc:0,combo:0,best:0,ok:0,n:0,log:[]};
+function intro(){const R=rounds[gs.r];view.innerHTML=`<div class="card game"><div class="vill"><i style="width:${gs.ok/total*100}%"></i></div><p style="margin:6px 0 0">Desa menyala ${Math.round(gs.ok/total*100)}%</p><h2 style="margin-top:20px">${R.t}</h2><p>${R.d}</p><button id="go3" class="sun">Mulai ronde</button></div>`;$("#go3").onclick=ask}
+function ask(){const R=rounds[gs.r],q=R.q[gs.i];gs.lock=0;gs.t=q.k=="o"?25:12;gs.pick=0;
+let b;
+if(q.k=="s")b=`<div class="tile">${q.q}</div><div class="two"><button id="y" style="background:var(--leaf)">Terbarukan</button><button id="n" style="background:var(--bad)">Tak Terbarukan</button></div>`;
+else if(q.k=="m")b=`<div class="tile" style="font-size:1.15rem">${q.q}</div><div class="chips">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${o}</button>`).join("")}</div>`;
+else{q.s=sh([0,1,2,3]);b=`<div class="tile" style="font-size:1.15rem">${q.q}</div><div class="chips">${q.s.map(j=>`<button class="opt" data-j="${j}">${q.o[j]}</button>`).join("")}</div>`}
+view.innerHTML=`<div class="card game"><div class="stats"><span>${R.t.split(":")[0]} (${gs.i+1}/${R.q.length})</span><span>Skor <span id="s">${gs.sc}</span></span><span>Beruntun <span id="c">${gs.combo}</span></span><span>⏱ <span id="t">${gs.t}</span></span></div><div class="vill" style="margin-top:8px"><i style="width:${gs.ok/total*100}%"></i></div>${b}<div id="fb" style="min-height:1.7em;font-weight:700;margin-top:10px"></div></div>`;
+if(q.k=="s"){$("#y").onclick=()=>fin(q,q.a==1,q.a?"Terbarukan":"Tak terbarukan");$("#n").onclick=()=>fin(q,q.a==0,q.a?"Terbarukan":"Tak terbarukan")}
+else if(q.k=="m")view.querySelectorAll(".opt").forEach(o=>o.onclick=()=>{const j=+o.dataset.j;o.classList.add(j==q.a?"good":"bad");fin(q,j==q.a,q.o[q.a])});
+else view.querySelectorAll(".opt").forEach(o=>o.onclick=()=>{if(gs.lock||o.classList.contains("good"))return;const j=+o.dataset.j;if(j==gs.pick){o.classList.add("good");gs.pick++;if(gs.pick==4)fin(q,true)}else{o.classList.add("bad");fin(q,false,q.o.join(" → "))}});
+gs.iv=setInterval(()=>{gs.t--;$("#t").textContent=gs.t;if(gs.t<=0)fin(q,false,q.k=="m"?q.o[q.a]:q.k=="s"?(q.a?"Terbarukan":"Tak terbarukan"):q.o.join(" → "),"Waktu habis")},1000)}
+function fin(q,r,corr,why){if(gs.lock)return;gs.lock=1;clearInterval(gs.iv);gs.n++;let add=0;
+if(r){gs.combo++;gs.ok++;gs.best=Math.max(gs.best,gs.combo);add=10+Math.ceil(gs.t/3)+Math.min(gs.combo-1,5)*2;gs.sc+=add}else gs.combo=0;
+gs.log.push([q.q,r,why||""]);$("#s").textContent=gs.sc;$("#c").textContent=gs.combo;
+const tl=view.querySelector(".tile");tl.classList.add(r?"good":"bad");
+$("#fb").textContent=r?`✅ Benar! +${add} poin`:`❌ ${why?why+". ":""}Jawaban benar: ${corr}`;
+setTimeout(()=>{gs.i++;if(gs.i>=rounds[gs.r].q.length){gs.r++;gs.i=0}
+if(gs.r>=rounds.length){S.g={done:true,skor:gs.sc,benar:gs.ok,percobaan:gs.n,combo:gs.best,log:gs.log};save();go(5)}else if(gs.i==0)intro();else ask()},r?900:1800)}
+intro();
+}
+
+function calc(){const m1={};M1.forEach((q,i)=>{(m1[q[0]]=m1[q[0]]||[]).push(S.m1[i])});const m1avg={};for(const k in m1)m1avg[k]=+(m1[k].reduce((a,b)=>a+b,0)/m1[k].length).toFixed(2);
+let ben=0;const detail=M2.map((q,i)=>{const r=S.m2[i]==q[5];if(r)ben++;return{no:i+1,topik:q[6],jawaban:S.m2[i],kunci:q[5],benar:r}});
+return{waktu:new Date().toISOString(),durasi_detik:Math.round((Date.now()-S.t0)/1000),nama:S.id.nama,kelas:S.id.kelas,absen:S.id.absen,m1_rata_rata:m1avg,m1_jawaban:S.m1,m2_skor:Math.round(ben/M2.length*100),m2_benar:ben,m2_detail:detail,m3_skor:S.g.skor,m3_benar:S.g.benar,m3_percobaan:S.g.percobaan,m3_combo:S.g.combo,keluar_tab:S.leaves}}
+
+async function renderDone(){const d=calc();
+view.innerHTML=`<div class="card"><h2>Menyimpan jawabanmu...</h2><p id="msg">Mohon tunggu. Jangan tutup halaman.</p></div>`;
+let ok=false;
+if(SCRIPT_URL){for(let i=0;i<3&&!ok;i++){try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(d)});ok=true}catch(e){await new Promise(r=>setTimeout(r,1200))}}}
+if(!ok){view.innerHTML=`<div class="card"><h2>Jawaban belum terkirim</h2><p>${SCRIPT_URL?"Koneksi bermasalah.":"Alamat penyimpanan guru belum diatur."} Periksa internet lalu coba lagi.</p><button id="rt" class="sun">Kirim ulang</button> <button id="dl">Unduh cadangan</button></div>`;
+$("#rt").onclick=renderDone;$("#dl").onclick=()=>{const a=document.createElement("a");a.href="data:application/json,"+encodeURIComponent(JSON.stringify(d,null,1));a.download=`asesmen-${d.nama}.json`;a.click()};return}
+S.step=6;localStorage.removeItem("asesmen");track();
+const lemah=d.m2_detail.filter(x=>!x.benar).map(x=>x.topik);
+view.innerHTML=`<div class="card"><h2>Misi selesai, ${S.id.nama}!</h2><p style="margin-top:-6px;color:var(--mut)">Kelas ${S.id.kelas} | No. absen ${S.id.absen}</p><p>Jawabanmu sudah tersimpan di Google Drive gurumu. Kamu boleh menutup halaman ini.</p>
+<div class="res"><div><b>${d.m2_skor}</b>Misi 2: Pengetahuan</div><div><b>${d.m3_skor}</b>Misi 3: Game</div><div><b>${d.m1_rata_rata.Minat}</b>Misi 1: Minat (1-5)</div></div>
+<p><b>Topik yang perlu kamu ulang:</b> ${lemah.length?lemah.join(", "):"tidak ada, kerja bagus!"}</p></div>`}
+
+S.step===1?go(1):go(S.step);
+</script>
+</body>
+</html>
